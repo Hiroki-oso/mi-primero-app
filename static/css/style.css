@@ -5,21 +5,25 @@
     --wh: white;
     --bl: black;
     --re: red;
+    --ge: green;
+    --db: rgb(47, 0, 255);
     
     /* text */ 
-    --xxs: 5px;
-    --xs: 10px;
-    --s: 15px;
-    --ms: 20px;
-    --ls: 25px;
-    --lm: 30px;
-    --ll: 40px;
-    --xl: 50px:
+ 
+    --xxs: 10px;
+    --xs:15px;
+    --s: 25px;
+    --ms: 40px;
+    --ls: 50px;
+    --lm: 60px;
+    --ll: 70px;
+    --xl: 80px:
 
-
+  
     /* font family */
 
 }
+
 html {
     height: 100%;
     width: 100%;
@@ -41,19 +45,20 @@ body {
     left: 2px;
 }
 header {
-    background: violet;
+    background: #6930c3;
     display: flex;
     justify-content: flex-end;
-    height: 105px;
+    height: 125px;
     max-width: 100%;
 }
 /* ドロップダウンリストの画像(header.html内) */
 img.img-drop {
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 10;
     border: 1px solid var(--bl);
     padding: 2px;
     border-radius: 6px;
+    
 }
 
 nav{
@@ -67,6 +72,7 @@ ul.nav-ul {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    margin-top: 25px;
 }
 li.nav-li {
     display: flex;
@@ -84,20 +90,41 @@ a.nav-link {
     color: var(--wh);
 }
 
+/* ハンバーガーナビ アイコン*/
+i.bi.bi-list{
+    color: var(--wh);
+    font-weight: bold;
+    font-size: var(--s);
+}
+/* ログイン中 */
+
+/* メッセージ　*/
+.container.mess {
+    height: 30px;
+}
 
 
 /* ---------- メイン　------------ */
 main {
     padding-top: 0;
-    background: yellow;
+    background: f8f9fa;
     height: 100vh;
 }
 h1.header-h1{
     text-align: center;
     color:var(--bl);
     font-size: 100px;
-    margin-top: 200px;
+    margin-top: 180px;
     font-family: 'Abril Fatface', cursive;
+    animation: bgchange 13s ease infinite;
+}
+@keyframes bgchange{
+    0% {color: var(--bl);}
+    25% {color:#4f772d}
+    50% {color: #4361ee;}
+    75% {color: #df3b57;}
+    99% {color: #5a189a;}
+    100% {color: var(--bl);}
 }
 
 /* メインのaside */
@@ -109,7 +136,7 @@ h1.header-h1{
     padding-left: 10px;
 } */
 h2.chara_h2{
-    margin: 15px 0;
+    margin: 20px 0;
 }
 th.aside-th{
     color: var(__re);
@@ -121,26 +148,66 @@ td.aside-td{
     text-align: right;
 }
 
-/* ---------- フッター　------------ */
+/* ログイン中 ユーザー名表示　*/
+.login-user-h4 {
+    color: var(--bl);
+    font-size: var(--s);
+    margin-left: 350px;
+}
+.login-user-span {
+    margin-left: 10px;
+    color: var(--db);
+    font-size: var(--xs);
+}
+/* ログアウト中でデーター未入力 */
+h1.col-12.col-md-6.logout-no-data {
+    margin: 110px auto;
+    /* margin-left: 400px; */
+    font-size: 2rem;
+    color: var(--bl);
+}
+/*メッセージ*/
+li.alert.alert-success {
+    display: flex;
+    align-items: center;
+    width: 1080px;
+    height: 15px;
 
-footer{
-    background: var(--re);
-    height: 100px;
-} 
-h2.footer-h2{
-    margin-left: 50px;
-} 
-/* icon */
-.i.bi-alarm{
-    font-size: 30px;
-    margin: 0 auto;
+}
+li.alert.alert-info {
+    display: flex;
+    align-items: center;
+    width: 1080px;
+    height: 15px;
+
+}
+li.alert.alert-warning {
+    display: flex;
+    align-items: center;
+    width: 1080px;
+    height: 15px;
+
+}
+li.alert.alert-danger {
+    display: flex;
+    align-items: center;
+    width: 1080px;
+    height: 15px;
+
+}
+.form-group.update {
+
+}
+.form-group.firstinput {
+
 }
 
 
+/******************* カード関連　******************/
 
 /* login signup のカード　*/
-.card {
-    box-shadow: 5px -5px rgb(132, 3, 158);
+.card.mt-5.mb-5.d-flex.align-items-center.mx-auto {
+    border: 1px solid var(--bl);
     border-radius: 10px;
 } 
 .form-control {
@@ -155,12 +222,14 @@ a.nav-li.logout {
 }
 
 /* delete のカード */
-.btn.btn-danger.btn-lg.rounded-circle {
-    width:100px;
-    height: 100px;
+
+button.btn.btn-danger{
+    width:60px;
+    height: 40px;
     text-align: center;
-    border-radius: 50%;
+    border-radius: 5px;
 }
+
 a.text-primary.a-delete{
     text-decoration: none;
 }
@@ -169,10 +238,6 @@ a.text-primary.a-delete:hover{
     cursor: pointer;
 }
 
-/* ファーム firstinput */
-/* form.form_firstinput {
-    margin-left: 200px;
-} */
 .card.form {
     margin: 20 auto;
 }
@@ -184,9 +249,72 @@ a.text-primary.a-delete:hover{
 .card.firstinput.mt-5{
     margin: 0 auto;
 }
+h3.signup.mt-3 {
+    color:var(--bl);
+    font-family: 'DM Serif Display', serif, 'Sawarabi Gothic', 'Abril Fatface','Montserrat', sans-serif;
+    letter-spacing: 3px;
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+h3.login.mt-3 {
+    color:var(--bl);
+    font-family: 'DM Serif Display', serif, 'Abril Fatface','Montserrat', sans-serif;
+    letter-spacing: 3px;
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
 
 /* 詳細ページの削除ボタンの下の前へ戻る */
 a.text-primary.forward-a {
     text-decoration: none;
+    margin-left: 45px;
 }
+
+/******************** フッター ***********************/
+
+footer{
+    background: #6930c3;
+    height: 100px;
+} 
+h2.footer-h2{
+    margin-left: 50px;
+} 
+/* icon */
+.i.bi-alarm{
+    font-size: 30px;
+    margin: 0 auto;
+}
+.col.col-12.col-md-6.d-flex.justify-content-center.mt-3{
+    margin: 0 auto;
+}
+
+i.bi.bi-twitter.me-3::before{
+    font-size: var(--s);
+    color: var(--wh);
+    margin-top: var(--xs);
+    margin-right:var(--xs);
+}
+i.bi.bi-instagram.me-3::before{
+    font-size: var(--s);
+    color: var(--wh);
+    margin-top: var(--xs);
+    margin-right:var(--xs);
+}
+i.bi.bi-linkedin.me-3::before{
+    font-size: var(--s);
+    color: var(--wh);
+    margin-top: var(--xs);
+    margin-right:var(--xs);
+}
+i.bi.bi-facebook.me-3::before{
+    font-size: var(--s);
+    color: var(--wh);
+    margin-top: var(--xs);
+    margin-right:var(--xs);
+}
+
+/********************* ページネーション　*****************/
+
+
 

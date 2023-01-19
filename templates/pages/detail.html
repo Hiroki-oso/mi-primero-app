@@ -1,64 +1,97 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block header %} 
-{% include 'snippets/header.html' %}
-{% endblock %}
-{% block main %}
+{% extends 'base.html' %} {% load static %} {% block header %} {% include
+'snippets/header.html' %} {% endblock %} {% block main %}
 <div class="container">
-  <div class="row">
-    <h2 class="chara_h2">体重 | BMI管理</h2> 
-    <div class="col-7 ">
-          <div class="card col-6 detail-page">
-              <div class="card-body col-6 col-md">
-                <p>{{object.created_at}}</p>
-                {% if user.is_authenticated %}
-                <p>{{user.username}}</p>
-                {% endif %}
-                <p>{{object.weight}} Kg</p>
-                <p>{{object.height}} cm</p>
-                <p>{{object.bmi}}</p>
-                <p>{{object.Appr_w}}</p> 
-                <p>{{object.memo}}</p>
-              </div>
-          </div> 
-          <div class="delete-page mt-3 ms-4">
-          {% if request.user == object.user %}
-          <a href="{% url 'lifemanage:delete' user.pk %}" class="btn btn-danger delte-btn ms-5 mb-3" style="width: 5rem;">Delete</a>  
-          <a href="{% url 'lifemanage:update' object.pk %}" class="btn btn-info delte-btn ms-5 mb-3" style="width: 5rem;">Update</a>  
-          {% endif %}
-            <div class="prev-p-detail">
-               <a href="{% url 'lifemanage:list' %}" class="text-primary forward-a">前のページへ</a> 
+    <div class="row">
+        <h3 class="chara_h2">体重 | BMI管理</h3>
+        <div class="col-md-6">
+            <div class="card-body col-md-6">
+                <table class="table col-md-6" style="width: 20rem">
+                    <tbody>
+                        <tr scope="row">
+                            <th>日付</th>
+                            <td>{{object.created_at}}</td>
+                        </tr>
+                        <tr scope="row">
+                            <th>お名前</th>
+                            <td>{{object.username}}</td>
+                        </tr>
+                        <tr scope="row">
+                            <th>体重</th>
+                            <td>{{object.weight}} kg</td>
+                        </tr>
+                        <tr scope="row">
+                            <th>身長</th>
+                            <td>{{object.height}} cm</td>
+                        </tr>
+                        <tr scope="row">
+                            <th>BMI</th>
+                            <td>{{object.bmi}}</td>
+                        </tr>
+                        <tr scope="row">
+                            <th>適正体重</th>
+                            <td>{{object.appr_w}} kg</td>
+                        </tr>
+                        <tr scope="row">
+                            <th>MEMO</th>
+                            <td>{{object.memo}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-          </div>
+            <div class="delete-page mt-3 ms-4">
+                {% if request.user == object.user %}
+                <a href="{% url 'lifemanage:delete' object.pk %}" class="btn btn-danger delte-btn ms-5 mb-3" style="width: 5rem">Delete</a>
+                <a href="{% url 'lifemanage:update' object.pk %}" class="btn btn-info delte-btn ms-5 mb-3" style="width: 5rem">Update</a>
+                {% endif %}
+                <div class="prev-p-detail">
+                    <p>
+                      <a href="{% url 'lifemanage:list' %}" class="text-primary forward-a">前のページへ</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <canvas id="myChart"></canvas>
+        </div>
     </div>
-    <div class="col-5">
-      <canvas id="myChart"></canvas>
-    </div>
-  </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  const ctx = document.getElementById('myChart');
+    const ctx = document.getElementById("myChart");
 
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [{
-        label: '# weight',
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: ["{{object.created_at}}"],
+            datasets: [
+                {
+                    label: "BMI",
+                    data: ["{{object.bmi}}"],
+                    backgroundColor: "#FFB1C1",
+                },
+                {
+                    label: "適正体重",
+                    data: ["{{object.appr_w}}"],
+                    backgroundColor: "#4169e1",
+                },
+                {
+                    label: "体重",
+                    data: ["{{object.weight}}"],
+                    backgroundColor: "#ffa500",
+                },
+            ],
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    stepSize: 1,
+                    min: 0,
+                    max: 80,
+                },
+            },
+        },
+    });
 </script>
-<!-- <script type="text/ja" src="{% static '/js/mychart.js' %}""></script> -->
+<!-- <script type="text/javascript" src="{% static '/js/mychart.js' %}""></script> -->
 {% endblock %}

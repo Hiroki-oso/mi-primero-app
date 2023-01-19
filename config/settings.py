@@ -1,27 +1,24 @@
 from pathlib import Path
 import os
-import environ
 from django.contrib import messages #メッセージ表示用で追記
+from django.core.management.utils import get_random_secret_key # 追記
+SECRET_KEY = get_random_secret_key() # 追記
+ 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
-# 追記
-env = environ.Env()
-root = environ.Path(BASE_DIR / 'secrets')
-# 本番環境
-# env.read_env(root('.env.prod'))
-# 開発環境
-env.read_env(root('.env.dev'))
+
+
+DEBUG=False
+ALLOWED_HOSTS=['*'] # 追記
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str('SECRET_KEY')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG')
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 
 # Application definition
@@ -33,9 +30,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # "pygments-renderer",
-    # "django_extensions",
-    # 'chartjs',
     "accounts",
     "lifemanage",
 ]
@@ -106,14 +100,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
 LANGUAGE_CODE = "ja"
-
 TIME_ZONE = "Asia/Tokyo"
-
 USE_I18N = True
-
 USE_TZ = True
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
@@ -130,15 +119,25 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/list/'
 LOGOUT_URL = '/logout/'
-LOGOUT_REDIRECT_URL = '/list/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# メッセージ
-# from django.contrib.messages import constants
-# MESSAGE_TAGS = {
-#     constants.SUCCESS: 'alert alert-success',
-# }
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'alert alert-danger',
+    messages.WARNING: 'alert alert-warning',
+    messages.INFO: 'alert alert-info',
+    messages.SUCCESS: 'alert alert-success',
+}
+#追記
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+# 追記
+try:
+    from .local_settings import *
+except:
+    pass
