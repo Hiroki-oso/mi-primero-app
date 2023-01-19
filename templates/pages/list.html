@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+    <!-- <ul class="nav-ul">
+      {% if user.is_authenticated %}
+       <a class="nav-li logout" href="{% url 'accounts:logout' %}">LogOut</a>
+      {% endif %}
+    </ul> -->
+{% block header %}
+{% include 'snippets/header.html' %}
+{% endblock %}
+{% block main %}
+{% if object_list == '' %}
+<h1>管理入力画面からデータを入力してください</p>
+{% else %}
+<div class="container list ">
+  <div class="row">
+    <h4 class="char_h2 d-flex justify-content-center mt-5 mb-4">体重 | BMI管理一覧</h4>
+    <div class="col col-xl-12 col-md-6 col-sm-4 d-flex align-items-start">
+      {% for object in object_list %}
+          <div class="card card-list" style="width: 20rem;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">日付 : {{object.created_at}}</li>
+              <li class="list-group-item">体重 : {{object.weight}}<span> kg</span></li>
+              <li class="list-group-item">BMI : {{object.bmi}}</li>
+              <li class="list-group-item">適正体重 : {{object.Appr_w}}</li>
+              <div class="button d-flex justify-content-center">
+              {% comment %} <a href="/detail/{{ user.id }}" class="btn btn-primary detail-btn" style="width: 5rem;">Detail</a> {% endcomment %}
+              <a href="{% url 'lifemanage:detail' user.id %}" class="btn btn-primary detail-btn" style="width: 5rem;">Detail</a> 
+              {% comment %} <a href="{% url 'lifemanage:update' user.pk %}" class="btn btn-success delteupdate-btn ms-5" style="width: 5rem;">update</a> {% endcomment %}
+              </div>
+            </ul>
+          </div>
+      {% endfor %}
+    </div>
+    {% comment %} {% include 'snippets/pagination.html' %} {% endcomment %}
+  </div>
+{% endif %}
+</div>
+{% endblock %}

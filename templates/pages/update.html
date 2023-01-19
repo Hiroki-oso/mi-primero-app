@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+<div class="row">
+    <div class="col col col-lg-8 col-md-6 col-sm-4 mx-auto update">
+        <div class="card update mt-5" style="width: 20rem;">
+            <form class="form_update" method="POST"> 
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="mb-3">
+                        <label for="" class="form-label ms-5 mt-3">お名前</label>
+                        <input type="text" class="form-control ms-5" id="" aria-describedby="emailHelp" name="username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label ms-5">身長 (cm)</label>
+                        <input type="text" class="form-control ms-5" id="" name="height">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label ms-5">体重 (kg)</label>
+                        <input type="text" class="form-control ms-5" id="" name="weight">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label ms-5">Memo</label>
+                        <textarea class="form-control ms-5" id="" rows="3" name="memo"></textarea>
+                    </div>
+                    <input type="submit" class="submit_update mb-3 ms-5 btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+{% endblock main %}

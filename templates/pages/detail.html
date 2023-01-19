@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block header %} 
+{% include 'snippets/header.html' %}
+{% endblock %}
+{% block main %}
+<div class="container">
+  <div class="row">
+    <h2 class="chara_h2">体重 | BMI管理</h2> 
+    <div class="col-7 ">
+          <div class="card col-6 detail-page">
+              <div class="card-body col-6 col-md">
+                <p>{{object.created_at}}</p>
+                {% if user.is_authenticated %}
+                <p>{{user.username}}</p>
+                {% endif %}
+                <p>{{object.weight}} Kg</p>
+                <p>{{object.height}} cm</p>
+                <p>{{object.bmi}}</p>
+                <p>{{object.Appr_w}}</p> 
+                <p>{{object.memo}}</p>
+              </div>
+          </div> 
+          <div class="delete-page mt-3 ms-4">
+          {% if request.user == object.user %}
+          <a href="{% url 'lifemanage:delete' user.pk %}" class="btn btn-danger delte-btn ms-5 mb-3" style="width: 5rem;">Delete</a>  
+          <a href="{% url 'lifemanage:update' object.pk %}" class="btn btn-info delte-btn ms-5 mb-3" style="width: 5rem;">Update</a>  
+          {% endif %}
+            <div class="prev-p-detail">
+               <a href="{% url 'lifemanage:list' %}" class="text-primary forward-a">前のページへ</a> 
+            </div>
+          </div>
+    </div>
+    <div class="col-5">
+      <canvas id="myChart"></canvas>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# weight',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+</script>
+<!-- <script type="text/ja" src="{% static '/js/mychart.js' %}""></script> -->
+{% endblock %}

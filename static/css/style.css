@@ -1,0 +1,192 @@
+@charset 'utf-8';
+
+:root{
+    /* color */
+    --wh: white;
+    --bl: black;
+    --re: red;
+    
+    /* text */ 
+    --xxs: 5px;
+    --xs: 10px;
+    --s: 15px;
+    --ms: 20px;
+    --ls: 25px;
+    --lm: 30px;
+    --ll: 40px;
+    --xl: 50px:
+
+
+    /* font family */
+
+}
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+
+/* ---------- ヘッダー　------------ */
+/* 　*/
+.dd-header {
+    margin-top: 50px;
+    position: absolute;
+    top: 0;
+    left: 2px;
+}
+header {
+    background: violet;
+    display: flex;
+    justify-content: flex-end;
+    height: 105px;
+    max-width: 100%;
+}
+/* ドロップダウンリストの画像(header.html内) */
+img.img-drop {
+    position: absolute;
+    top: 0;
+    border: 1px solid var(--bl);
+    padding: 2px;
+    border-radius: 6px;
+}
+
+nav{
+    display: flex;
+    /* margin-left: auto; */
+    /* align-items: flex-end; */
+    margin-bottom: 30px;
+
+}
+ul.nav-ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+li.nav-li {
+    display: flex;
+    list-style: none;
+    margin-top: 60px;
+    margin-right: 30px;
+    /* justify-content: flex-end; */
+}
+a.nav-link {
+    text-decoration: none;
+    padding-left: 10px;
+    padding-right: 20px;
+    font-size: var(--mm);
+    font-weight: 600;
+    color: var(--wh);
+}
+
+
+
+/* ---------- メイン　------------ */
+main {
+    padding-top: 0;
+    background: yellow;
+    height: 100vh;
+}
+h1.header-h1{
+    text-align: center;
+    color:var(--bl);
+    font-size: 100px;
+    margin-top: 200px;
+    font-family: 'Abril Fatface', cursive;
+}
+
+/* メインのaside */
+.container.index{
+    padding-left: 70px;
+}
+/* aside.input-data {
+    padding-top: 50px;
+    padding-left: 10px;
+} */
+h2.chara_h2{
+    margin: 15px 0;
+}
+th.aside-th{
+    color: var(__re);
+
+}
+td.aside-td{
+    color: var(__re);
+    width: 100px;
+    text-align: right;
+}
+
+/* ---------- フッター　------------ */
+
+footer{
+    background: var(--re);
+    height: 100px;
+} 
+h2.footer-h2{
+    margin-left: 50px;
+} 
+/* icon */
+.i.bi-alarm{
+    font-size: 30px;
+    margin: 0 auto;
+}
+
+
+
+/* login signup のカード　*/
+.card {
+    box-shadow: 5px -5px rgb(132, 3, 158);
+    border-radius: 10px;
+} 
+.form-control {
+    width: 200px;
+}
+
+/* ログアウト　*/
+a.nav-li.logout {
+    color: var(--wh);
+    margin: 70px 50px 0 0;
+    text-decoration: none;
+}
+
+/* delete のカード */
+.btn.btn-danger.btn-lg.rounded-circle {
+    width:100px;
+    height: 100px;
+    text-align: center;
+    border-radius: 50%;
+}
+a.text-primary.a-delete{
+    text-decoration: none;
+}
+a.text-primary.a-delete:hover{
+    opacity: .5;
+    cursor: pointer;
+}
+
+/* ファーム firstinput */
+/* form.form_firstinput {
+    margin-left: 200px;
+} */
+.card.form {
+    margin: 20 auto;
+}
+.card.card-list{
+    margin-bottom: 20px;
+    margin-left: 20px;
+    width: 150px;
+}
+.card.firstinput.mt-5{
+    margin: 0 auto;
+}
+
+/* 詳細ページの削除ボタンの下の前へ戻る */
+a.text-primary.forward-a {
+    text-decoration: none;
+}
+
