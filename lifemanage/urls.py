@@ -3,7 +3,7 @@ from .import views
 
 app_name = 'lifemanage'
 urlpatterns = [
-    path('', views.TopView.as_view(), name='top'),
+    path('top/', views.TopView.as_view(), name='top'),
     path('second/', views.IndexSecondView.as_view(), name='second'),
     path('detail/<int:pk>/', views.IndexDetailView.as_view(), name='detail'),
     path('delete/<int:pk>/', views.IndexDeleteView.as_view(), name='delete'),
