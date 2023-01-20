@@ -1,12 +1,12 @@
 from pathlib import Path
 import os
-from django.contrib import messages #メッセージ表示用で追記
-from django.core.management.utils import get_random_secret_key # 追記
-SECRET_KEY = get_random_secret_key() # 追記
+from django.contrib import messages 
+from django.core.management.utils import get_random_secret_key 
+SECRET_KEY = get_random_secret_key() 
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 DEBUG=False
-ALLOWED_HOSTS=['127.0.0.1', 'herokuapp.com'] # 追記
+ALLOWED_HOSTS=['127.0.0.1', 'herokuapp.com'] 
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -96,11 +96,7 @@ MESSAGE_TAGS = {
     messages.INFO: 'alert alert-info',
     messages.SUCCESS: 'alert alert-success',
 }
-#追記
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-# 追記
-#Heroku database
+# Heroku database
 import dj_database_url
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
@@ -112,7 +108,7 @@ try:
 except ImportError:
  pass
 if not DEBUG:
-    SECRET_KEY = get_random_secret_key() #削除  
+    SECRET_KEY = get_random_secret_key() 
 
 import django_heroku 
 django_heroku.settings(locals())

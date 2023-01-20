@@ -2,13 +2,23 @@
 <!DOCTYPE html>
 <html lang="ja">
     <head>
-        {% block head %} {% include 'snippets/head.html' %} {% endblock %}
+        {% block head %} 
+        {% include 'snippets/head.html' %} 
+        {% endblock %}
     </head>
     <body>
-        <header>{% block header %} {% endblock %}</header>
-        <main>{% block main %} {% endblock %}</main>
+        <header>
+            {% block header %} 
+            {% endblock %}
+        </header>
+        <main>
+            {% block main %} 
+            {% endblock %}
+        </main>
         <footer>
-            {% block footer %} {% include 'snippets/footer.html' %} {% endblock%}
+            {% block footer %}
+             {% include 'snippets/footer.html' %} 
+            {% endblock%}
         </footer>
     </body>
 </html>
