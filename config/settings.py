@@ -114,5 +114,5 @@ except ImportError:
 if not DEBUG:
     SECRET_KEY = get_random_secret_key() #削除  
 
-import django_heroku
+import django_heroku 
 django_heroku.settings(locals())

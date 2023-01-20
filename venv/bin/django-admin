@@ -1,4 +1,4 @@
-#!/Users/hiroki/python/Django/lifemanagement/venv/bin/python
+#!/Users/hiroki/python/Django/lifemanegement2_1/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
