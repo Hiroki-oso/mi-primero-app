@@ -3,26 +3,10 @@ import os
 from django.contrib import messages #メッセージ表示用で追記
 from django.core.management.utils import get_random_secret_key # 追記
 SECRET_KEY = get_random_secret_key() # 追記
- 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
-
-
 DEBUG=False
-ALLOWED_HOSTS=['*'] # 追記
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-
-
-# SECURITY WARNING: don't run with debug turned on in production!
-
-
-
-# Application definition
-
+ALLOWED_HOSTS=['127.0.0.1', 'herokuapp.com'] # 追記
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -33,10 +17,9 @@ INSTALLED_APPS = [
     "accounts",
     "lifemanage",
 ]
-
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -62,24 +45,17 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = "config.wsgi.application"
-
-
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "name",
+        "USER": "user",
+        "PASSWORD": " ",
+        "HOST": "host",
+        "PORT": " ",
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -94,36 +70,23 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
-
-
-# Internationalization
-# https://docs.djangoproject.com/en/4.1/topics/i18n/
-
 LANGUAGE_CODE = "ja"
 TIME_ZONE = "Asia/Tokyo"
 USE_I18N = True
 USE_TZ = True
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
 # カスタムユーザーモデル
 AUTH_USER_MODEL = 'accounts.User'
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-#メディア
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# MEDIR_URL = '/media/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 # ログイン、ログアウト
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/list/'
 LOGOUT_URL = '/logout/'
 LOGOUT_REDIRECT_URL = '/'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 from django.contrib.messages import constants as messages
@@ -137,7 +100,19 @@ MESSAGE_TAGS = {
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 # 追記
+#Heroku database
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+db_from_env = dj_database_url.config(conn_max_age=600,
+ssl_require=True)
+DATABASES['default'].update(db_from_env)
 try:
-    from .local_settings import *
-except:
-    pass
+ from .local_settings import *
+except ImportError:
+ pass
+if not DEBUG:
+    SECRET_KEY = get_random_secret_key() #削除  
+
+import django_heroku
+django_heroku.settings(locals())
