@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% load static %} 
+{% extends 'base.html' %}
+{% load static %} 
 {% block header %} 
 {% include 'snippets/header.html' %} 
 {% endblock %} 
@@ -7,7 +8,7 @@
     <div class="col col-lg-8 col-md-6 col-sm-4 mx-auto">
         <div class="card mt-5 mb-5 d-flex align-items-center mx-auto" style="width: 22rem">
             <h3 class="signup mt-3">Signup</h3>
-            <img class="" src={% static "img/brightness-high-fill.svg" %} alt="" width="35" height="35">
+            <img class="" src={% static 'img/brightness-high-fill.svg/' %} alt="" width="35" height="35">
             <div class="card-body mt-1 mb-3">
                 <form method="post">
                     {% csrf_token %}

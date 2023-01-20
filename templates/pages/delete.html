@@ -11,7 +11,7 @@
                         <div class="d-flex justify-content-center mt-5">
                         {% csrf_token %}
                         <button  action="" class="btn btn-danger" type="submit">削除</button>
-                        {% comment %} <a herf="{% url 'lifemanage:detail' user.pk %}" class="btn btn-primary cancel ms-5">キャンセル</a>   {% endcomment %}
+                        {% comment %} <a herf="{% url 'lifemanage:detail' user.pk %}" class="btn btn-primary cancel ms-5">キャンセル</a> {% endcomment %}
                   </form>
                   </div>
                   <a href="{% url 'lifemanage:list' %}" class="text-primary a-delete">前のページへ</a> 
