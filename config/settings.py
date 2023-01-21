@@ -5,7 +5,7 @@ from django.core.management.utils import get_random_secret_key
 SECRET_KEY = get_random_secret_key() 
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
-DEBUG=True
+DEBUG=False
 ALLOWED_HOSTS=['127.0.0.1' ,'herokuapp.com'] 
 INSTALLED_APPS = [
     "django.contrib.admin",
