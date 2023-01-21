@@ -5,7 +5,7 @@ from django.core.management.utils import get_random_secret_key
 SECRET_KEY = get_random_secret_key() 
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
-DEBUG=False
+DEBUG=True
 ALLOWED_HOSTS=['127.0.0.1' ,'herokuapp.com'] 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -86,7 +86,7 @@ STATICFILES_DIRS = (
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/list/'
 LOGOUT_URL = '/logout/'
-LOGOUT_REDIRECT_URL = '/top/'
+LOGOUT_REDIRECT_URL = '/'
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 from django.contrib.messages import constants as messages
