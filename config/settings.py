@@ -19,7 +19,7 @@ INSTALLED_APPS = [
 ]
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    # "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -47,14 +47,10 @@ TEMPLATES = [
 ]
 WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "name",
-        "USER": "user",
-        "PASSWORD": " ",
-        "HOST": "host",
-        "PORT": " ",
-    }
+ 'default': {
+ 'ENGINE': 'django.db.backends.sqlite3',
+ 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+ }
 }
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -97,17 +93,17 @@ MESSAGE_TAGS = {
     messages.SUCCESS: 'alert alert-success',
 }
 # Heroku database
-import dj_database_url
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
-db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
-DATABASES['default'].update(db_from_env)
-try:
- from .local_settings import *
-except ImportError:
- pass
-if not DEBUG:
-    SECRET_KEY = get_random_secret_key() 
+# import dj_database_url
+# db_from_env = dj_database_url.config()
+# DATABASES['default'].update(db_from_env)
+# db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
+# DATABASES['default'].update(db_from_env)
+# try:
+#  from .local_settings import *
+# except ImportError:
+#  pass
+# if not DEBUG:
+#     SECRET_KEY = get_random_secret_key() 
 
-import django_heroku 
-django_heroku.settings(locals())
+# import django_heroku 
+# django_heroku.settings(locals())
