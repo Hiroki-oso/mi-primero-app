@@ -1,11 +1,13 @@
 from pathlib import Path
 import os
+import environ
+
 from django.contrib import messages 
 from django.core.management.utils import get_random_secret_key 
-SECRET_KEY = get_random_secret_key() 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
-DEBUG=False
+
 ALLOWED_HOSTS=['127.0.0.1' ,'herokuapp.com'] 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -19,7 +21,6 @@ INSTALLED_APPS = [
 ]
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    # "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -90,18 +91,25 @@ MESSAGE_TAGS = {
     messages.INFO: 'alert alert-info',
     messages.SUCCESS: 'alert alert-success',
 }
-# Heroku database
-# import dj_database_url
-# db_from_env = dj_database_url.config()
-# DATABASES['default'].update(db_from_env)
-# db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
-# DATABASES['default'].update(db_from_env)
-# try:
-#  from .local_settings import *
-# except ImportError:
-#  pass
-# if not DEBUG:
-#     SECRET_KEY = get_random_secret_key() 
+MEDIA_URL = '/media/'
+#デプロイ設定
+DEBUG=False
+try:
+    from .local_settings import *
+except ImportError:
+    pass
 
-# import django_heroku 
-# django_heroku.settings(locals())
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+else:
+    import environ
+    env = environ.Env()
+    env.read_env(os.path.join(BASE_DIR, '.env'))
+     
+    SECRET_KEY = env('SECRET_KEY')
+    ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+     
+    STATIC_ROOT = '/usr/share/nginx/html/static'
+    MEDIA_ROOT = '/usr/share/nginx/html/media'
+     
