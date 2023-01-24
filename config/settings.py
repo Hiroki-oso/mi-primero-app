@@ -4,10 +4,10 @@ import environ
 
 from django.contrib import messages 
 from django.core.management.utils import get_random_secret_key 
-
+SECRET_KEY = get_random_secret_key() 
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
-
+DEBUG=False
 ALLOWED_HOSTS=['108.61.223.96' ,'local.host'] 
 INSTALLED_APPS = [
     "django.contrib.admin",
